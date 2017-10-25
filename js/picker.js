@@ -20,7 +20,7 @@ class Picker {
         $('#pick').click(() => {
             if (this.started) {
                 const chosenIndex = Math.floor(Math.random() * this.hat.length);
-                let name = this.hat.pop(chosenIndex);
+                const name = this.hat.pop(chosenIndex);
                 $('#chosen').text(name);
                 if ($('#speak').prop('checked')) {
                     this.utterance.text = name;
