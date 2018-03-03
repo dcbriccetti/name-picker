@@ -13,11 +13,13 @@ function draw() {
 }
 
 function drawNames(names) {
-    names.map((name, i) => {
-        const angle = TWO_PI / names.length * i + frameCount / 10;
+    const angleBetweenNames = TWO_PI / names.length;
+    const animationRotation = frameCount / 10;
+
+    names.map((name, nameIndex) => {
+        const angle = angleBetweenNames * nameIndex + animationRotation;
         const x = Math.cos(angle);
         const y = Math.sin(angle);
-        fill(0);
         textSize(map(x, -1, 1, 14, 32));
         text(name, x * 50, y * 200);
     });
