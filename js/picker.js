@@ -1,27 +1,26 @@
 class Picker {
     constructor() {
-        this.started = false;
         this.speech = window.speechSynthesis;
         this.utterance = new SpeechSynthesisUtterance();
+        this.cardSpace = [];
 
         $('#start').click(() => {
             const maxCalls = $('#max-calls').val();
             const names = $('#names').val().split('\n');
-            this.hat = [];
-            names.forEach(name => {
+            this.cardSpace = [];
+            names.map(name => name.trim()).filter(name => name.length > 0).forEach(name => {
                 for (let i = 0; i < maxCalls; ++i) {
-                    this.hat.push(new NameCard(name));
+                    this.cardSpace.push(new NameCard(name));
                 }
             });
-            Picker.shuffle(this.hat);
-            this.started = true;
+            Picker.shuffle(this.cardSpace);
         });
 
         $('#pick').click(() => {
-            this.hat = this.hat.filter(card => card.state === card.States.NORMAL);
-            if (this.started && this.hat.length) {
-                const chosenIndex = Math.floor(Math.random() * this.hat.length);
-                const card = this.hat[chosenIndex];
+            this.cardSpace = this.cardSpace.filter(card => card.state === card.States.NORMAL);
+            if (this.cardSpace.length) {
+                const chosenIndex = Math.floor(Math.random() * this.cardSpace.length);
+                const card = this.cardSpace[chosenIndex];
                 card.pick();
                 $('#chosen').text(card.name);
                 if ($('#speak').prop('checked')) {

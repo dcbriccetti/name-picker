@@ -64,7 +64,5 @@ function setup() {
 
 function draw() {
     background(0);
-    if (picker.started) {
-        picker.hat.forEach(card => card.draw());
-    }
+    picker.cardSpace.forEach(card => card.draw());
 }
