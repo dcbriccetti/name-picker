@@ -1,12 +1,12 @@
 const picker = new Picker();
 
 function setup() {
-    createCanvas(600, 600);
+    createCanvas(400, 500).parent('#canvas');
 }
 
 function draw() {
     background(255);
-    translate(width / 2, height / 2);
+    translate(width / 4, height / 2);
     if (picker.started) {
         drawNames(picker.hat);
     }

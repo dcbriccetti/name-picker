@@ -3,54 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Talking Name Picker</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <style>
         #chosen {
             font-size: 200%;
-            margin-left: 1em;
+            margin-left: .5em;
         }
     </style>
 </head>
 <body>
 <main role="main" class="container">
     <h3>Talking Name Picker</h3>
-    <div id="collection">
-        <textarea id="names" rows="5" placeholder="Names"></textarea><br/>
-        <label for="max-calls">Calls per name</label>
-        <select id="max-calls">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-            <option>7</option>
-            <option>8</option>
-            <option>9</option>
-            <option>10</option>
-        </select>
-        <br/>
-        <button id="start" type="button" class="btn btn-primary">Start</button>
-        <label>
-            <input id='speak' type="checkbox" checked autocomplete="off"> Speak Name
-        </label>
-        <button id="pick" type="button" class="btn btn-primary">Pick</button>
-        <span id="chosen"></span>
-        <p/>
+    <div id="collection" class="row">
+        <div class="col">
+            <textarea id="names" rows="5" placeholder="Names"></textarea><br/>
+            <label for="max-calls">Calls per name</label>
+            <input type="number" value="1" id="max-calls" style="width: 3em">
+            <br/>
+            <button id="start" type="button" class="btn btn-primary">Start</button>
+            <label>
+                <input id='speak' type="checkbox" checked autocomplete="off"> Speak Name
+            </label>
+            <button id="pick" type="button" class="btn btn-primary">Pick</button>
+            <div id="chosen"></div>
+        </div>
+        <div class="col" id="canvas">
+        </div>
     </div>
 </main>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
-        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
-        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/addons/p5.sound.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.min.js"></script>
 <script src="js/picker.js"></script>
 <script src="js/sketch.js"></script>
 </body>

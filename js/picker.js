@@ -18,9 +18,9 @@ class Picker {
         });
 
         $('#pick').click(() => {
-            if (this.started) {
+            if (this.started && this.hat.length) {
                 const chosenIndex = Math.floor(Math.random() * this.hat.length);
-                const name = this.hat.pop(chosenIndex);
+                const name = this.hat.splice(chosenIndex, 1);
                 $('#chosen').text(name);
                 if ($('#speak').prop('checked')) {
                     this.utterance.text = name;
