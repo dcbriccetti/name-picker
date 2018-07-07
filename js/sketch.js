@@ -5,10 +5,11 @@ class NameCard {
     constructor(name) {
         this.name = name;
         this.hue = random(0, 340);
-        this.position = createVector(random(-width / 2, width / 2), random(-height / 2, height / 2), random(0, -500));
+        this.position = createVector(random(-width / 2, width / 2),
+            random(-height / 2, height / 2), random(0, -500));
         this.rotations = createVector(random(0, TWO_PI), random(0, TWO_PI), random(0, TWO_PI));
-        const MAX_ROT_Δ = .01;
-        this.rotationΔs = createVector(random(0, MAX_ROT_Δ), random(0, .05), random(0, .05));
+        const MAX_ROT_Δ = .02;
+        this.rotationΔs = createVector(random(0, MAX_ROT_Δ), random(0, MAX_ROT_Δ), random(0, MAX_ROT_Δ));
         this.States = {NORMAL: 1, PICKING: 2, PICKED: 3};
         this.state = this.States.NORMAL;
     }
@@ -40,7 +41,7 @@ class NameCard {
                 this.position.z = min(MAX_Z, this.position.z + 5);
                 if (this.rotations.x === 0 && this.rotations.y === 0 && this.rotations.z === 0 &&
                     this.position.x === 0 && this.position.y === 0 && this.position.z === MAX_Z) {
-                    this.state = 2;
+                    this.state = this.States.PICKED;
                 }
                 break;
             case this.States.PICKED:
