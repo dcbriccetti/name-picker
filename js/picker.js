@@ -18,9 +18,11 @@ class Picker {
         });
 
         $('#pick').click(() => {
+            this.hat = this.hat.filter(card => card.picking === 0);
             if (this.started && this.hat.length) {
                 const chosenIndex = Math.floor(Math.random() * this.hat.length);
-                const card = this.hat.splice(chosenIndex, 1)[0];
+                const card = this.hat[chosenIndex];
+                card.pick();
                 $('#chosen').text(card.name);
                 if ($('#speak').prop('checked')) {
                     this.utterance.text = card.name;
