@@ -18,7 +18,7 @@ class Picker {
         });
 
         $('#pick').click(() => {
-            this.hat = this.hat.filter(card => card.picking === 0);
+            this.hat = this.hat.filter(card => card.state === card.States.NORMAL);
             if (this.started && this.hat.length) {
                 const chosenIndex = Math.floor(Math.random() * this.hat.length);
                 const card = this.hat[chosenIndex];
