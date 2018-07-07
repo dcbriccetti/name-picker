@@ -1,26 +1,46 @@
+
 const picker = new Picker();
+let pg;
 
-function setup() {
-    createCanvas(400, 500).parent('#canvas');
-}
+class NameCard {
+    constructor(name) {
+        this.name = name;
+        this.hue = random(0, 340);
+        this.position = createVector(random(-width / 2, width / 2), random(-height / 2, height / 2), random(100, -500));
+        this.rotations = createVector(random(0, TWO_PI), random(0, TWO_PI), random(0, TWO_PI));
+        const MAX_ROT_Δ = .01;
+        this.rotationΔs = createVector(random(0, MAX_ROT_Δ), random(0, .05), random(0, .05));
+    }
 
-function draw() {
-    background(255);
-    translate(width / 4, height / 2);
-    if (picker.started) {
-        drawNames(picker.hat);
+    draw() {
+        push();
+        pg.background(this.hue, 100, 40);
+        pg.fill(255);
+        pg.textSize(45);
+        pg.text(this.name, 10, 40);
+        texture(pg);
+        translate(this.position.x, this.position.y, this.position.z);
+        rotateX(this.rotations.x);
+        rotateY(this.rotations.y);
+        rotateX(this.rotations.z);
+        this.rotations.x += this.rotationΔs.x;
+        this.rotations.y += this.rotationΔs.y;
+        this.rotations.z += this.rotationΔs.z;
+        plane(200, 50);
+        pop();
     }
 }
 
-function drawNames(names) {
-    const angleBetweenNames = TWO_PI / names.length;
-    const animationRotation = frameCount / 10;
+function setup() {
+    colorMode(HSB);
+    createCanvas(400, 500, WEBGL).parent('#canvas');
+    pg = createGraphics(200, 50);
+    pg.colorMode(HSB);
+}
 
-    names.map((name, nameIndex) => {
-        const angle = angleBetweenNames * nameIndex + animationRotation;
-        const x = Math.cos(angle);
-        const y = Math.sin(angle);
-        textSize(map(x, -1, 1, 14, 32));
-        text(name, x * 50, y * 200);
-    });
+function draw() {
+    background(0);
+    if (picker.started) {
+        picker.hat.forEach(card => card.draw());
+    }
 }

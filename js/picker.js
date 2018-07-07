@@ -10,7 +10,7 @@ class Picker {
             this.hat = [];
             names.forEach(name => {
                 for (let i = 0; i < maxCalls; ++i) {
-                    this.hat.push(name)
+                    this.hat.push(new NameCard(name));
                 }
             });
             Picker.shuffle(this.hat);
@@ -20,10 +20,10 @@ class Picker {
         $('#pick').click(() => {
             if (this.started && this.hat.length) {
                 const chosenIndex = Math.floor(Math.random() * this.hat.length);
-                const name = this.hat.splice(chosenIndex, 1);
-                $('#chosen').text(name);
+                const card = this.hat.splice(chosenIndex, 1)[0];
+                $('#chosen').text(card.name);
                 if ($('#speak').prop('checked')) {
-                    this.utterance.text = name;
+                    this.utterance.text = card.name;
                     this.speech.speak(this.utterance);
                 }
             }
