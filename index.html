@@ -15,8 +15,14 @@
 <body>
 <main role="main" class="container">
     <h3>Talking Name Picker</h3>
+    <p style="font-size: 70%">By <a href="https://davebsoft.com">Dave Briccetti</a><a style="margin-left: 1em" href="https://github.com/dcbriccetti/name-picker">Source code</a></p>
     <div id="collection" class="row">
         <div class="col">
+            <p>Type or paste in names, one per line. For names that are mispronounced,
+                follow the name with a '|' and a phonetic
+            spelling, e.g., Briccetti|brihchetti. Indicate the maximum number of times
+            you want each person to be called, and push Start. Push Pick each time
+            you want to pick a person.</p>
             <textarea id="names" rows="5" placeholder="Names"></textarea><br/>
             <label for="max-calls">Calls per name</label>
             <input type="number" value="1" id="max-calls" style="width: 3em">

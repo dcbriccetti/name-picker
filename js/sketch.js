@@ -2,8 +2,9 @@ const picker = new Picker();
 let pg;
 
 class NameCard {
-    constructor(name) {
+    constructor(name, phoneticName) {
         this.name = name;
+        this.phoneticName = phoneticName;
         this.hue = random(0, 340);
         this.position = createVector(random(-width / 2, width / 2),
             random(-height / 2, height / 2), random(0, -500));
