@@ -47,15 +47,11 @@ class NameCard {
         this.rotations.z = (this.rotations.z + this.rotationΔs.z) % p.TWO_PI
         break
       case State.Picking:
-        this.rotations.x = p.max(0, this.rotations.x - .1)
-        this.rotations.y = p.max(0, this.rotations.y - .1)
-        this.rotations.z = p.max(0, this.rotations.z - .1)
-        this.position.x = p.max(0, this.position.x - 5)
-        this.position.y = p.max(0, this.position.y - 5)
+        this.rotations.mult(0.9)
+        this.position.x *= 0.9;
+        this.position.y *= 0.9;
         const MAX_Z = 500
-        this.position.z = p.min(MAX_Z, this.position.z + 5)
-        if (this.rotations.x === 0 && this.rotations.y === 0 && this.rotations.z === 0 &&
-          this.position.x === 0 && this.position.y === 0 && this.position.z === MAX_Z) {
+        if ((this.position.z += 15) >= MAX_Z) {
           this.state = State.Picked
         }
         break
