@@ -1,12 +1,20 @@
 class Picker {
-    constructor() {
+    private speech: SpeechSynthesis;
+    private utterance: SpeechSynthesisUtterance;
+    cardSpace: any[];
+    private p: any;
+    private pg: any;
+    constructor(p, pg) {
+        this.p = p
+        this.pg = pg
         this.speech = window.speechSynthesis;
         this.utterance = new SpeechSynthesisUtterance();
         this.cardSpace = [];
 
         $('#start').click(() => {
             const maxCalls = $('#max-calls').val();
-            const lines = $('#names').val().split('\n');
+            const names = <string> $('#names').val();
+            const lines = names.split('\n');
             this.cardSpace = [];
             lines.forEach(line => {
                 const parts = line.trim().split('|');
@@ -14,7 +22,7 @@ class Picker {
                 if (name) {
                     const phoneticName = parts[1] || name;
                     for (let i = 0; i < maxCalls; ++i) {
-                        this.cardSpace.push(new NameCard(name, phoneticName));
+                        this.cardSpace.push(new NameCard(p, pg, name, phoneticName));
                     }
                 }
             });
@@ -22,7 +30,7 @@ class Picker {
         });
 
         $('#pick').click(() => {
-            this.cardSpace = this.cardSpace.filter(card => card.state === card.States.NORMAL);
+            this.cardSpace = this.cardSpace.filter(card => card.state === State.Normal);
             if (this.cardSpace.length) {
                 const chosenIndex = Math.floor(Math.random() * this.cardSpace.length);
                 const card = this.cardSpace[chosenIndex];
