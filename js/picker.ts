@@ -3,7 +3,8 @@ class Picker {
   private readonly pg: any
   private readonly speech: SpeechSynthesis
   private readonly utterance: SpeechSynthesisUtterance
-  cardSpace: any[]
+  cardSpace: NameCard[]
+  private lastPickedName: string
 
   constructor(p, pg) {
     this.p = p
@@ -11,6 +12,7 @@ class Picker {
     this.speech = window.speechSynthesis
     this.utterance = new SpeechSynthesisUtterance()
     this.cardSpace = []
+    this.lastPickedName = null;
 
     $('#start').click(() => {
       const maxCalls = $('#max-calls').val()
@@ -33,9 +35,9 @@ class Picker {
     $('#pick').click(() => {
       this.cardSpace = this.cardSpace.filter(card => card.state === State.Normal)
       if (this.cardSpace.length) {
-        const chosenIndex = Math.floor(Math.random() * this.cardSpace.length)
-        const card = this.cardSpace[chosenIndex]
+        const card = this.chooseCard()
         card.pick()
+        this.lastPickedName = card.name
         $('#chosen').text(card.name)
         if ($('#speak').prop('checked')) {
           this.utterance.text = card.phoneticName
@@ -43,6 +45,20 @@ class Picker {
         }
       }
     })
+  }
+
+  private chooseCard(): NameCard {
+    const eligibleCards = this.getEligibleCards()
+    const chosenIndex = Math.floor(Math.random() * eligibleCards.length)
+    return eligibleCards[chosenIndex]
+  }
+
+  private getEligibleCards(): NameCard[] {
+    const uniqueNames = new Set()
+    this.cardSpace.forEach(card => uniqueNames.add(card.name))
+    return uniqueNames.size > 1 && this.lastPickedName != null ?
+      this.cardSpace.filter(card => card.name != this.lastPickedName) :
+      this.cardSpace
   }
 
   static shuffle(a) {

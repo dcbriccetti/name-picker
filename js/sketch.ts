@@ -5,13 +5,13 @@ enum State { Picking, Picked, Normal}
 class NameCard {
   private readonly p: any
   private readonly pg: any
-  private readonly name: any
-  private readonly phoneticName: any
+  readonly name: any
+  readonly phoneticName: any
   private readonly hue: any
   private position: any
   private rotations: any
   private rotationΔs: any
-  private state: State
+  state: State
 
   constructor(p, pg, name, phoneticName) {
     this.p = p
