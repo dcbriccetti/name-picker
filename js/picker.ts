@@ -40,6 +40,7 @@ class Picker {
         this.lastPickedName = card.name
         $('#chosen').text(card.name)
         if ($('#speak').prop('checked')) {
+          this.utterance.volume = 0.6
           this.utterance.text = card.phoneticName
           this.speech.speak(this.utterance)
         }
